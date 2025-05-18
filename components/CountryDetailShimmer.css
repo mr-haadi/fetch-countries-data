@@ -1,0 +1,95 @@
+:root {
+  --light-shimmer: #c7c7c7;
+  --dark-shimmer: #455869;
+}
+
+/* Base shimmer effect */
+.shimmer .flag,
+.shimmer .title,
+.country-details.shimmer p {
+  background-color: var(--light-shimmer);
+  border-radius: 4px;
+  animation: shimmer 1.5s infinite linear;
+  background-image: linear-gradient(
+    90deg,
+    var(--light-shimmer) 0%,
+    #e0e0e0 50%,
+    var(--light-shimmer) 100%
+  );
+  background-size: 200% 100%;
+}
+
+/* Dark mode override */
+body.dark .shimmer .flag,
+body.dark .shimmer .title,
+body.dark .shimmer p {
+  background-color: var(--dark-shimmer);
+  background-image: linear-gradient(
+    90deg,
+    var(--dark-shimmer) 0%,
+    #566b7e 50%,
+    var(--dark-shimmer) 100%
+  );
+}
+
+/* Layout styles */
+.country-details {
+  display: flex;
+  column-gap: 45px;
+  align-items: center;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding: 20px;
+}
+
+.shimmer .flag {
+  width: 40%;
+  height: 240px;
+  border-radius: 4px;
+}
+
+.shimmer .title {
+  height: 36px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+}
+
+.country-details.shimmer p {
+  height: 22px;
+  margin-bottom: 12px;
+  border-radius: 2px;
+}
+
+.country-details.shimmer p:last-child {
+  width: 50%;
+}
+
+.details-text-container {
+  flex-grow: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 940px) {
+  .country-details {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+    row-gap: 20px;
+  }
+
+  .shimmer .flag,
+  .details-text-container {
+    width: 100%;
+    max-width: 500px;
+  }
+}
+
+/* Shimmer animation */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}

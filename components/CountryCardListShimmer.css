@@ -1,0 +1,85 @@
+
+ .shimmer-card {
+    --shimmer-color: #c7c7c7;
+}
+
+body.dark .shimmer-card {
+    --shimmer-color: #455869;
+    background-color: #2b3945;
+}
+
+.countries-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 64px;
+    max-width: 1200px;
+    margin-inline: auto;
+}
+
+.shimmer-card {
+    height: 338px;
+    background-color: var(--elements-color);
+}
+
+.shimmer-card .flag-container {
+    background-color: var(--shimmer-color);
+}
+
+.shimmer-card .card-title {
+    height: 32px;
+    background-color: var(--shimmer-color);
+    border-radius: 4px;
+}
+
+.shimmer-card p {
+    height: 22px;
+    border-radius: 4px;
+    background-color: var(--shimmer-color);
+}
+
+.shimmer-card p:last-child {
+    width: 60%;
+}
+
+
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+.shimmer-card .flag-container,
+.shimmer-card .card-title,
+.shimmer-card p {
+    position: relative;
+    overflow: hidden;
+    background-image: linear-gradient(
+        to right,
+        var(--shimmer-color) 0%,
+        #e0e0e0 20%,
+        var(--shimmer-color) 40%,
+        var(--shimmer-color) 100%
+    );
+    background-size: 1000px 100%;
+    animation: shimmer 1.5s infinite linear;
+}
+
+@media (width <= 945px) {
+    .countries-container {
+        column-gap: 28px;
+    }
+}
+
+@media (max-width: 627px) {
+    .countries-container {
+        grid-template-columns: 1fr;
+        justify-items: center;
+    }
+
+    .shimmer-card {
+        width: 90%; /* Optional: control card width on small screens */
+    }
+}
