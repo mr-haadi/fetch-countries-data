@@ -13,7 +13,6 @@ root.render(
       <Route path=":country" element={<CountriesDetail />} />
       <Route path="contact" element={<h2>Contact US</h2>} />
       </Route>
-      {/* <Route path='*' element={<Error />} /> */}
     </Routes>
   </Router>
 );

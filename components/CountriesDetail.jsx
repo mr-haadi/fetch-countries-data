@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./CountryDetail.css";
 import { Link, useLocation, useParams } from "react-router-dom";
 import CountryDetailShimmer from "./CountryDetailShimmer";
+import Error from "./Error";
 
 const CountriesDetail = () => {
   const params = useParams();
@@ -63,26 +64,7 @@ const CountriesDetail = () => {
 
   if (error) {
     return (
-      <>
-        <div
-          style={{
-            marginTop: "1rem",
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          Something went wrong! 404
-        </div>
-        <div
-          style={{
-            marginTop: "3rem",
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          Country Not Found!
-        </div>
-      </>
+      <Error/>
     );
   }
 
