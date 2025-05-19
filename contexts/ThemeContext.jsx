@@ -4,9 +4,10 @@ import { useState } from "react";
 export const ThemeContext = createContext();
 
 export function ThemeProvider({ children }) {
-  const [isDark, setDark] = useState(
-    JSON.parse(localStorage.getItem("isDarkMode"))
-  );
+  const [isDark, setDark] = useState(() => {
+  const stored = localStorage.getItem("isDarkMode");
+  return stored !== null ? JSON.parse(stored) : true; // default to true
+});
 
-  return <ThemeContext value={[isDark, setDark]}>{children}</ThemeContext>;
+  return <ThemeContext.Provider value={[isDark, setDark]}>{children}</ThemeContext.Provider>;
 }

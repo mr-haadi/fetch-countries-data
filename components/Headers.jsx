@@ -1,8 +1,7 @@
 import { useTheme } from "../hooks/useTheme";
 
-
 const Headers = () => {
-  const [isDark, setDark] = useTheme()
+  const [isDark, setDark] = useTheme(false)
 
   if (isDark) {
     document.body.classList.add("dark");
