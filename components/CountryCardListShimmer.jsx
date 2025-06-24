@@ -3,7 +3,7 @@ import "./CountryCardListShimmer.css"
 export default function CountryCardListShimmer() {
   return (
     <div className="countries-container">
-      {Array.from({ length: 12 }).map((el, i) => {
+      {Array.from({ length: 22 }).map((el, i) => {
         return (
           <div key={i} className="country-card shimmer-card">
             <div className="flag-container"></div>

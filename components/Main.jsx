@@ -14,12 +14,12 @@ export default function Main() {
         setCountryDataList(data);
       });
   }, []);
-
+console.log(countryDataList);
   return (
     <>
       <main>
         <SearchContainer setQuery={setQuery} />
-        {countryDataList.length === 0 ? (
+        {(countryDataList.length === 0 || typeof countryDataList === 'object') ? (
           <CountryCardListShimmer />
         ) : (
           <div className="countries-card-container">
