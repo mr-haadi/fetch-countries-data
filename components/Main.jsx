@@ -8,24 +8,29 @@ export default function Main() {
   const [countryDataList, setCountryDataList] = useState([]);
 
   useEffect(() => {
-    fetch("https://restcountries.com/v3.1/all")
+    fetch(
+      "https://restcountries.com/v3.1/all?fields=name,flags,region,capital,tld,population,currencies,languages,subregion,borders"
+    )
       .then((res) => res.json())
       .then((data) => {
         setCountryDataList(data);
       });
   }, []);
-console.log(countryDataList);
+
+
   return (
     <>
       <main>
         <SearchContainer setQuery={setQuery} />
-        {(countryDataList.length === 0 || typeof countryDataList === 'object') ? (
+        {countryDataList.length === 0 ? (
           <CountryCardListShimmer />
         ) : (
           <div className="countries-card-container">
             {countryDataList
-              .filter((country) =>
-                country.name.common.toLowerCase().includes(query) || country.region.toLowerCase().includes(query)
+              .filter(
+                (country) =>
+                  country.name.common.toLowerCase().includes(query) ||
+                  country.region.toLowerCase().includes(query)
               )
               .map((country) => {
                 return (
@@ -36,7 +41,7 @@ console.log(countryDataList);
                     countryName={country.name.common}
                     population={country.population.toLocaleString("en-IN")}
                     region={country.region}
-                    tld={country.capital?.[0]}
+                    capital={country.capital?.[0]}
                     data={country}
                   />
                 );

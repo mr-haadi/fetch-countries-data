@@ -12,7 +12,6 @@ const CountriesDetail = () => {
   const [countryData, setCountryData] = useState(null);
   const [error, setError] = useState(false);
 
-
   function updateCountryData(data) {
     setCountryData({
       name: data.name.common,
@@ -30,19 +29,23 @@ const CountriesDetail = () => {
       borders: [],
     });
 
-    if (!data.borders) {
-      data.borders = [];
+    // If borders exist, fetch their names in one request
+    if (data.borders && data.borders.length > 0) {
+      fetch(
+        `https://restcountries.com/v3.1/alpha?codes=${data.borders.join(
+          ","
+        )}&fields=name`
+      )
+        .then((res) => res.json())
+        .then((borderCountries) => {
+          const borderNames = borderCountries.map((c) => c.name.common);
+          setCountryData((prev) => ({ ...prev, borders: borderNames }));
+        })
+        .catch(() => {
+          // if border fetch fails, keep borders empty
+          setCountryData((prev) => ({ ...prev, borders: [] }));
+        });
     }
-
-    Promise.all(
-      data.borders.map((border) => {
-        return fetch(`https://restcountries.com/v3.1/alpha/${border}`)
-          .then((res) => res.json())
-          .then(([borderCountryName]) => borderCountryName.name.common);
-      })
-    ).then((borders) => {
-      setTimeout(setCountryData((prevState) => ({ ...prevState, borders })));
-    });
   }
 
   useEffect(() => {
@@ -63,9 +66,7 @@ const CountriesDetail = () => {
   }, [countryName]);
 
   if (error) {
-    return (
-      <Error/>
-    );
+    return <Error />;
   }
 
   return (

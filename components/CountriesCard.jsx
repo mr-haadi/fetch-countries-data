@@ -5,7 +5,7 @@ export default function CountriesCard({
   countryName,
   population,
   region,
-  tld,
+  capital,
   data
 }) {
   
@@ -26,7 +26,7 @@ export default function CountriesCard({
         </p>
         <p>
           <b>Capital: </b>
-          {tld}
+          {capital}
         </p>
       </div>
     </Link>
